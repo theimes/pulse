@@ -1,49 +1,54 @@
 <script setup lang="ts">
 import { supabase } from '@/lib/supabaseClient'
-import { onMounted, ref } from 'vue'
-import type { Tables } from '../../../database/types'
+import { ref, h } from 'vue'
+import type { Tables } from 'database/types'
+import type { ColumnDef } from '@tanstack/vue-table'
+import DataTable from '@/components/ui/data-table/DataTable.vue'
 
 const projects = ref<Tables<'projects'> | null>()
-/*
 ;(async () => {
   const { data, error } = await supabase.from('projects').select('*')
 
-  if (error) {
-    console.error(error)
-  } else {
-    projects.value = data
-  }
+  if (error) console.error(error)
+
+  projects.value = data
+
+  console.log('projects: ', projects.value)
 })()
-*/
 
-const getProjects = async () => {
-  const { data, error } = await supabase.from('projects').select('*')
-
-  if (error) {
-    console.error(error)
-  } else {
-    projects.value = data
+const columns: ColumnDef<Tables<'projects'>>[] = [
+  {
+    accessorKey: 'name',
+    header: () => h('div', { class: 'text-left' }, 'Name'),
+    cell: ({ row }) => h('div', { class: 'text-left font-medium' }, row.getValue('name'))
+  },
+  {
+    accessorKey: 'status',
+    header: () => h('div', { class: 'text-left' }, 'Status'),
+    cell: ({ row }) => h('div', { class: 'text-left font-medium' }, row.getValue('status'))
+  },
+  {
+    accessorKey: 'created_at',
+    header: () => h('div', { class: 'text-left' }, 'Created At'),
+    cell: ({ row }) => h('div', { class: 'text-left font-medium' }, row.getValue('created_at'))
+  },
+  {
+    accessorKey: 'collaborators',
+    header: () => h('div', { class: 'text-left' }, 'Collaborators'),
+    cell: ({ row }) =>
+      h('div', { class: 'text-left font-medium' }, JSON.stringify(row.getValue('collaborators')))
   }
-}
-
-onMounted(() => getProjects())
+]
 </script>
 
 <template>
   <div>
     <h1>Projects Page</h1>
-    <p>Projects page content</p>
   </div>
 
   <Suspense>
     <div>
-      <ul>
-        <li v-for="project in projects" :key="project.id">
-          <RouterLink :to="{ name: '/projects/[id]', params: { id: project.id } }">{{
-            project.name
-          }}</RouterLink>
-        </li>
-      </ul>
+      <DataTable v-if="projects" :columns="columns" :data="projects" />
     </div>
     <template #fallback>
       <div>Loading...</div>

@@ -6,8 +6,10 @@ const route = useRoute()
 
 <template>
   <div>
-    <h1>Project {{ route.params?.id }}</h1>
-    <p>Single project content</p>
-    <RouterLink to="/projects">Projects</RouterLink>
+    <h1>Project {{ route.params?.slug }}</h1>
+
+    <div class="tg:px-16">
+      <RouterLink to="/projects">Projects</RouterLink>
+    </div>
   </div>
 </template>

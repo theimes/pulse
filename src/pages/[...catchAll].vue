@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { usePageStore } from '@/stores/page'
+
+usePageStore().pageData.title = 'Not found'
+
 const route = useRoute()
 </script>
 

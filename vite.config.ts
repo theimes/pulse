@@ -38,7 +38,10 @@ export default defineConfig({
       imports: [
         // presets
         'vue',
-        VueRouterAutoImports
+        VueRouterAutoImports,
+        {
+          pinia: ['defineStore', 'storeToRefs', 'acceptHMRUpdate']
+        }
       ],
       // Filepath to generate corresponding .d.ts file.
       // Defaults to './auto-imports.d.ts' when `typescript` is installed locally.
@@ -46,7 +49,8 @@ export default defineConfig({
       dts: true,
       // Include auto-imported packages in Vite's `optimizeDeps` options
       // Recommend to enable
-      viteOptimizeDeps: true
+      viteOptimizeDeps: true,
+      dirs: ['src/stores']
     }),
     Components({
       /* options */

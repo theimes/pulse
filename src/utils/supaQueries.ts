@@ -12,3 +12,16 @@ export const projectsQuery = supabase
   .select(`id, name, slug, created_at, status, collaborators`)
 
 export type projectsData = QueryData<typeof projectsQuery>
+
+export const projectQuery = (slug: string) =>
+  supabase
+    .from('projects')
+    .select(
+      `
+    id, name, slug, created_at, status, collaborators,
+    tasks (id, name, status, due_date)`
+    )
+    .eq('slug', slug)
+    .single()
+
+export type projectData = QueryData<ReturnType<typeof projectQuery>>

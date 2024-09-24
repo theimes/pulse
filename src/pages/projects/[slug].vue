@@ -1,13 +1,20 @@
 <script setup lang="ts">
 import { projectQuery } from '@/utils/supaQueries'
-import type { projectData } from '@/utils/supaQueries'
+import type { ProjectData } from '@/utils/supaQueries'
 
 const route = useRoute('/projects/[slug]')
 
-const project = ref<projectData | null>(null)
+const project = ref<ProjectData | null>(null)
+
+watch(
+  () => project.value?.name,
+  (name) => {
+    usePageStore().pageData.title = `Project ${name}`
+  }
+)
 
 const getProject = async () => {
-  const { data, error } = await projectQuery(route.params?.slug)
+  const { data, error } = await projectQuery(route.params?.slug || '')
 
   if (error) console.error(error)
 
@@ -15,8 +22,6 @@ const getProject = async () => {
 }
 
 await getProject()
-
-usePageStore().pageData.title = `Project ${project.value?.name || ''}`
 
 console.log(project.value)
 </script>
@@ -30,11 +35,7 @@ console.log(project.value)
     <TableRow>
       <TableHead> Description </TableHead>
       <TableCell>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad iure qui tempora ex nihil, ab
-        reprehenderit dolorem sunt veritatis perferendis? Repudiandae quis velit quasi ab natus quia
-        ratione voluptas deserunt labore sed distinctio nam fuga fugit vero voluptates placeat
-        aperiam, saepe excepturi eos harum consectetur doloremque perspiciatis nesciunt! Incidunt,
-        modi.
+        {{ project?.description }}
       </TableCell>
     </TableRow>
     <TableRow>
@@ -80,7 +81,11 @@ console.log(project.value)
           </TableHeader>
           <TableBody>
             <TableRow v-for="p in project?.tasks" :key="p.id">
-              <TableCell> {{ p.name }}</TableCell>
+              <TableCell>
+                <RouterLink :to="`/tasks/${p.id}`">
+                  {{ p.name }}
+                </RouterLink>
+              </TableCell>
               <TableCell> {{ p.status }} </TableCell>
               <TableCell> {{ p.due_date }} </TableCell>
             </TableRow>

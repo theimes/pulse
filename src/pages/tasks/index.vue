@@ -6,7 +6,7 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
 
 const tasks = ref<Tables<'tasks'> | null>(null)
-;(async () => {
+const getTasks = async () => {
   const { data, error } = await supabase.from('tasks').select('*')
 
   if (error) {
@@ -14,7 +14,9 @@ const tasks = ref<Tables<'tasks'> | null>(null)
   } else {
     tasks.value = data
   }
-})()
+}
+
+await getTasks()
 
 const columns: ColumnDef<Tables<'tasks'>>[] = [
   {
@@ -56,17 +58,12 @@ const columns: ColumnDef<Tables<'tasks'>>[] = [
 
 <template>
   <div>
-    <h1>Projects Page</h1>
+    <h1>Tasks Page</h1>
   </div>
 
-  <Suspense>
-    <div>
-      <DataTable v-if="tasks" :columns="columns" :data="tasks" />
-    </div>
-    <template #fallback>
-      <div>Loading...</div>
-    </template>
-  </Suspense>
+  <div>
+    <DataTable v-if="tasks" :columns="columns" :data="tasks" />
+  </div>
 
   <div>
     <RouterLink to="/">Home</RouterLink>

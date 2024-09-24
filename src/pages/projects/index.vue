@@ -6,15 +6,15 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
 
 const projects = ref<Tables<'projects'> | null>()
-;(async () => {
+const getProjects = async () => {
   const { data, error } = await supabase.from('projects').select('*')
 
   if (error) console.error(error)
 
   projects.value = data
+}
 
-  console.log('projects: ', projects.value)
-})()
+await getProjects()
 
 const columns: ColumnDef<Tables<'projects'>>[] = [
   {
@@ -54,14 +54,9 @@ const columns: ColumnDef<Tables<'projects'>>[] = [
     <h1>Projects Page</h1>
   </div>
 
-  <Suspense>
-    <div>
-      <DataTable v-if="projects" :columns="columns" :data="projects" />
-    </div>
-    <template #fallback>
-      <div>Loading...</div>
-    </template>
-  </Suspense>
+  <div>
+    <DataTable v-if="projects" :columns="columns" :data="projects" />
+  </div>
 
   <div>
     <RouterLink to="/">Home</RouterLink>

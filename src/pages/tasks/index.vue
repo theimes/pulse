@@ -18,8 +18,6 @@ const getTasks = async () => {
 }
 
 await getTasks()
-
-console.log(tasks.value)
 </script>
 
 <template>

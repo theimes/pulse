@@ -3,20 +3,40 @@ const router = useRouter()
 
 const errorStore = useErrorStore()
 
-router.afterEach((to, from) => {
-  console.log(to, from)
+const error = ref(errorStore.activeError)
+
+const message = ref('')
+const customCode = ref(0)
+const details = ref('')
+const code = ref('')
+const hint = ref('')
+const statusCode = ref(0)
+
+if (error.value && !('code' in error.value)) {
+  message.value = error.value.message
+  customCode.value = error.value.customCode ?? 0
+}
+if (error.value && 'code' in error.value) {
+  message.value = error.value.message
+  details.value = error.value.details
+  code.value = error.value.code
+  hint.value = error.value.hint
+  statusCode.value = error.value.statusCode ?? 0
+}
+
+router.afterEach(() => {
   errorStore.activeError = null
 })
-
-const { activeError } = storeToRefs(useErrorStore())
 </script>
 
 <template>
   <section class="error">
     <div>
       <iconify-icon icon="lucide:triangle-alert" class="error__icon" />
-      <h1 class="error__code">{{ activeError?.customCode }}</h1>
-      <p class="error__msg">{{ activeError?.message }}</p>
+      <h1 class="error__code">{{ customCode || code }}</h1>
+      <p v-if="statusCode > 0" class="error__msg">Status Code: {{ statusCode }}</p>
+      <p class="error__msg">{{ message }}</p>
+      <p v-if="details" class="error__msg">{{ details }}</p>
       <div class="error-footer">
         <p class="error-footer__text">You'll find lots to explore on the home page.</p>
         <RouterLink to="/">

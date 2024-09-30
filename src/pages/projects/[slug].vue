@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { projectQuery } from '@/utils/supaQueries'
 import type { ProjectData } from '@/utils/supaQueries'
+import { stat } from 'fs'
 
 const route = useRoute('/projects/[slug]')
 
@@ -14,11 +15,10 @@ watch(
 )
 
 const getProject = async () => {
-  const { data, error } = await projectQuery(route.params?.slug || '')
+  const { data, error, status } = await projectQuery(route.params?.slug || '')
 
-  if (error) console.error(error)
-
-  project.value = data
+  if (error) useErrorStore().setError({ error: error, customCode: status })
+  else project.value = data
 }
 
 await getProject()

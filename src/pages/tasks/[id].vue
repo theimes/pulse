@@ -13,11 +13,10 @@ watch(
 )
 
 const getProject = async () => {
-  const { data, error } = await TaskWithProjectQuery(route.params?.id)
+  const { data, error, status } = await TaskWithProjectQuery(route.params?.id)
 
-  if (error) console.error(error)
-
-  task.value = data
+  if (error) useErrorStore().setError({ error: error, customCode: status })
+  else task.value = data
 }
 
 await getProject()

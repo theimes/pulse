@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useErrorStore } from './stores/error'
 
-/* 
+/*
 const MockComponent = defineComponent(async () => {
   const greeting = ref('Hello, World!')
 
@@ -18,7 +18,7 @@ const MockComponent = defineComponent(async () => {
 
 const errorStore = useErrorStore()
 
-const { activeError } = storeToRefs(errorStore)
+const activeError = ref(errorStore.activeError)
 
 onErrorCaptured((error) => {
   errorStore.setError({ error: error, customCode: 500 })

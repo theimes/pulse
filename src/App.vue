@@ -18,11 +18,11 @@ const MockComponent = defineComponent(async () => {
 
 const errorStore = useErrorStore()
 
-const activeError = ref(errorStore.activeError)
+const { activeError } = storeToRefs(useErrorStore())
 
 onErrorCaptured((error) => {
   errorStore.setError({ error: error, customCode: 500 })
-  return false
+  return
 })
 </script>
 

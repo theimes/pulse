@@ -20,8 +20,6 @@ const getProject = async () => {
 }
 
 await getProject()
-
-console.log(task.value)
 </script>
 
 <template>

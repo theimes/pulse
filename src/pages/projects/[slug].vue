@@ -22,8 +22,6 @@ const getProject = async () => {
 }
 
 await getProject()
-
-console.log(project.value)
 </script>
 
 <template>

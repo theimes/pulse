@@ -16,7 +16,14 @@ const MockComponent = defineComponent(async () => {
 })
  */
 
-const { activeError } = storeToRefs(useErrorStore())
+const errorStore = useErrorStore()
+
+const { activeError } = storeToRefs(errorStore)
+
+onErrorCaptured((error) => {
+  errorStore.setError({ error: error, customCode: 500 })
+  return false
+})
 </script>
 
 <template>

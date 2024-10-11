@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { projectQuery } from '@/utils/supaQueries'
 import type { ProjectData } from '@/utils/supaQueries'
-import { stat } from 'fs'
 
 const route = useRoute('/projects/[slug]')
 

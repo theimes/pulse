@@ -9,7 +9,7 @@ const router = createRouter({
 router.beforeEach((to) => {
   const { user } = storeToRefs(useAuthStore())
 
-  if (!user.value && to.name !== '/login' && to.name !== '/register') {
+  if (!user.value && !['/login', '/register'].includes(to.path)) {
     return {
       name: '/login'
     }

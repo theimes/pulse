@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { supabase } from './lib/supabaseClient'
 import { useErrorStore } from './stores/error'
 
 /*
@@ -27,12 +26,7 @@ onErrorCaptured((error) => {
 })
 
 onMounted(() => {
-  supabase.auth.onAuthStateChange((event, session) => {
-    setTimeout(async () => {
-      console.log(`[App.vue] onAuthStateChange: ${event}`)
-      await useAuthStore().setAuth(session)
-    }, 0)
-  })
+  useAuthStore().trackAuthChanges()
 })
 </script>
 

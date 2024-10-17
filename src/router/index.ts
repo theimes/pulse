@@ -6,4 +6,14 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to) => {
+  const { user } = storeToRefs(useAuthStore())
+
+  if (!user.value && to.name !== '/login' && to.name !== '/register') {
+    return {
+      name: '/login'
+    }
+  }
+})
+
 export default router

@@ -34,13 +34,7 @@ export const login = async (formData: LoginForm) => {
     password: formData.password
   })
 
-  if (error) {
-    console.error('Error signing in', error)
-    return false
-  } else {
-    console.log('Signed in successfully')
-    return true
-  }
+  return { error }
 }
 
 export const logout = async () => {

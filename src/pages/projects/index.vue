@@ -1,18 +1,15 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { ProjectsQuery } from '@/utils/supaQueries'
-import type { Projects } from '@/utils/supaQueries'
 import { columns } from '@/utils/tableColumns/projectColumns'
+import { useProjectsStore } from '@/stores/loaders/projects'
 
 usePageStore().pageData.title = 'Projects'
 
-const projects = ref<Projects | null>()
-const getProjects = async () => {
-  const { data, error, status } = await ProjectsQuery
+const projectsLoader = useProjectsStore()
 
-  if (error) useErrorStore().setError({ error: error, customCode: status })
-  else projects.value = data
-}
+const { projects } = storeToRefs(projectsLoader)
+
+const { getProjects } = projectsLoader
 
 await getProjects()
 </script>

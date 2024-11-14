@@ -47,7 +47,7 @@ const createPrimaryTestUser = async () => {
   const email = testingUserEmail
   const { data, error } = await supabase.auth.signUp({
     email: email,
-    password: 'password',
+    password: 'pa$$w0rd',
     options: {
       data: {
         first_name: firstName,

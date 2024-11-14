@@ -1,8 +1,8 @@
 import type { ColumnDef } from '@tanstack/vue-table'
-import type { ProjectsData } from '../supaQueries'
+import type { Projects } from '../supaQueries'
 import { RouterLink } from 'vue-router'
 
-export const columns: ColumnDef<ProjectsData[0]>[] = [
+export const columns: ColumnDef<Projects[0]>[] = [
   {
     accessorKey: 'name',
     header: () => h('div', { class: 'text-left' }, 'Name'),

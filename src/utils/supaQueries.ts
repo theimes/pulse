@@ -23,7 +23,7 @@ export const ProjectsQuery = supabase
   .from('projects')
   .select(`id, name, slug, description, created_at, status, collaborators`)
 
-export type ProjectsData = QueryData<typeof ProjectsQuery>
+export type Projects = QueryData<typeof ProjectsQuery>
 
 export const projectQuery = (slug: string) =>
   supabase

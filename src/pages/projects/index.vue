@@ -12,6 +12,12 @@ const { projects } = storeToRefs(projectsLoader)
 const { getProjects } = projectsLoader
 
 await getProjects()
+
+const { getGroupedCollabs, groupedCollabs } = useCollabs()
+
+await getGroupedCollabs(projects.value)
+
+console.log('test :: ', JSON.stringify(groupedCollabs.value))
 </script>
 
 <template>

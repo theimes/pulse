@@ -11,7 +11,7 @@ export default [
     name: 'app/files-to-ignore',
     files: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**']
   },
-  ...pluginVue.configs['flat-essential'],
+  ...pluginVue.configs['flat/essential'],
   {
     rules: {
       'vue/multi-word-component-names': 0

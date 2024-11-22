@@ -17,7 +17,7 @@ const { getGroupedCollabs, groupedCollabs } = useCollabs()
 
 await getGroupedCollabs(projects.value)
 
-console.log('test :: ', JSON.stringify(groupedCollabs.value))
+const columnsWithCollabs = columns(groupedCollabs)
 </script>
 
 <template>
@@ -26,7 +26,7 @@ console.log('test :: ', JSON.stringify(groupedCollabs.value))
   </div>
 
   <div>
-    <DataTable v-if="projects" :columns="columns" :data="projects" />
+    <DataTable v-if="projects" :columns="columnsWithCollabs" :data="projects" />
   </div>
 
   <div>

@@ -40,9 +40,11 @@ export const columns = (collabs: Ref<GroupedCollabs>): ColumnDef<Projects[0]>[] 
         { class: 'text-left font-medium' },
         collabs.value[row.original.id]
           ? collabs.value[row.original.id]?.map((collab) => {
-              return h(Avatar, () =>
-                h(AvatarImage, { src: collab.avatar_url || '', alt: collab.username })
-              )
+              return h(RouterLink, { to: `/users/${collab.username}` }, () => {
+                return h(Avatar, { class: 'hover:scale-110 transition-transform' }, () =>
+                  h(AvatarImage, { src: collab.avatar_url || '', alt: collab.username })
+                )
+              })
             })
           : row.original.collaborators.map(() => {
               return h(Avatar, { class: 'animate-pulse' })

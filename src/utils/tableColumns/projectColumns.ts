@@ -5,6 +5,7 @@ import type { Ref } from 'vue'
 import type { GroupedCollabs } from '@/types/GroupedCollabs'
 import Avatar from '@/components/ui/avatar/Avatar.vue'
 import AvatarImage from '@/components/ui/avatar/AvatarImage.vue'
+import AvatarFallback from '@/components/ui/avatar/AvatarFallback.vue'
 
 export const columns = (collabs: Ref<GroupedCollabs>): ColumnDef<Projects[0]>[] => [
   {
@@ -37,11 +38,15 @@ export const columns = (collabs: Ref<GroupedCollabs>): ColumnDef<Projects[0]>[] 
       h(
         'div',
         { class: 'text-left font-medium' },
-        collabs.value[row.original.id]?.map((collab) => {
-          return h(Avatar, () =>
-            h(AvatarImage, { src: collab.avatar_url || '', alt: collab.username })
-          )
-        })
+        collabs.value[row.original.id]
+          ? collabs.value[row.original.id]?.map((collab) => {
+              return h(Avatar, () =>
+                h(AvatarImage, { src: collab.avatar_url || '', alt: collab.username })
+              )
+            })
+          : row.original.collaborators.map(() => {
+              return h(Avatar, { class: 'animate-pulse' })
+            })
       )
   }
 ]

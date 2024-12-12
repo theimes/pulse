@@ -19,7 +19,9 @@ await getProject(slug)
   <Table>
     <TableRow>
       <TableHead> Name </TableHead>
-      <TableCell> {{ project?.name }} </TableCell>
+      <TableCell>
+        <AppInPlaceEdit v-model="project.name" />
+      </TableCell>
     </TableRow>
     <TableRow>
       <TableHead> Description </TableHead>

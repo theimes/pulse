@@ -16,11 +16,14 @@ await getProject(slug)
 </script>
 
 <template>
-  <Table>
+  <Table v-if="project">
     <TableRow>
       <TableHead> Name </TableHead>
       <TableCell>
-        <AppInPlaceEdit v-model="project.name" />
+        <AppInPlaceEdit
+          v-model="project.name"
+          @commit="console.log(`changed name to ${project.name}`)"
+        />
       </TableCell>
     </TableRow>
     <TableRow>

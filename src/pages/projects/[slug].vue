@@ -84,7 +84,7 @@ const collabs = project.value?.collaborators
           <TableBody>
             <TableRow v-for="p in project?.tasks" :key="p.id">
               <TableCell>
-                <RouterLink :to="`/tasks/${p.id}`">
+                <RouterLink :to="{ name: '/tasks/[id]', params: { id: p.id } }">
                   {{ p.name }}
                 </RouterLink>
               </TableCell>

@@ -1,9 +1,13 @@
 import { supabase } from '@/lib/supabaseClient'
 import type { QueryData } from '@supabase/supabase-js'
 
-export const TasksWithProjectQuery = supabase.from('tasks')
-  .select(`id, name, status, due_date, project_id, collaborators,
-    projects (id, name, slug)`)
+export const TasksWithProjectQuery = supabase
+  .from('tasks')
+  .select(
+    `id, name, status, due_date, project_id, collaborators,
+    projects (id, name, slug)`
+  )
+  .order('id', { ascending: true })
 
 export type TasksWithProject = QueryData<typeof TasksWithProjectQuery>
 
@@ -26,6 +30,7 @@ export const updateTaskQuery = (updatedTask = {}, id: number) => {
 export const projectsQuery = supabase
   .from('projects')
   .select(`id, name, slug, description, created_at, status, collaborators`)
+  .order('id', { ascending: true })
 
 export type Projects = QueryData<typeof projectsQuery>
 

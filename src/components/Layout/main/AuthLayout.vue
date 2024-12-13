@@ -1,10 +1,14 @@
 <script setup lang="ts">
 // use the usePageStore to acces the page data
 const { pageData } = storeToRefs(usePageStore())
+
+const taskSheetOpen = ref(false)
 </script>
 
 <template>
-  <Sidebar />
+  <Sidebar @taskClicked="taskSheetOpen = !taskSheetOpen" />
+  <AppNewTask v-model="taskSheetOpen" />
+
   <div class="flex flex-col lg:ml-52 ml-16 transition-[margin]">
     <TopNavbar />
     <main class="flex flex-col flex-1 gap-4 p-4 lg:gap-6 lg:p-6">

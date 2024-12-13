@@ -23,6 +23,8 @@ const executeAction = async (action: string) => {
     }
   }
 }
+
+defineEmits(['taskClicked'])
 </script>
 
 <template>
@@ -34,9 +36,17 @@ const executeAction = async (action: string) => {
         <iconify-icon icon="lucide:menu"></iconify-icon>
       </Button>
 
-      <Button variant="outline" size="icon" class="w-8 h-8">
-        <iconify-icon icon="lucide:plus"></iconify-icon>
-      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <Button variant="outline" size="icon" class="w-8 h-8">
+            <iconify-icon icon="lucide:plus"></iconify-icon>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem @click="$emit('taskClicked')">New Task</DropdownMenuItem>
+          <DropdownMenuItem to="/tasks/new">New Project</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
 
     <nav class="flex flex-col gap-2 justify-between h-full relative">

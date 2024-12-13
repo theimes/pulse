@@ -64,7 +64,7 @@ export const useTasksStore = defineStore('tasks-store', () => {
     if (!task.value) return
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { projects, ...taskProperties } = task.value
+    const { projects, id, ...taskProperties } = task.value
 
     await updateTaskQuery(taskProperties, task.value.id)
   }

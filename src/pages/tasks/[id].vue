@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { TaskWithProjectQuery, type TaskWithProject } from '@/utils/supaQueries'
+const { id } = useRoute('/tasks/[id]').params
 
-const route = useRoute('/tasks/[id]')
-
-const task = ref<TaskWithProject | null>(null)
+const taskLoader = useTasksStore()
+const { task } = storeToRefs(taskLoader)
+const { getTask, updateTask } = taskLoader
 
 watch(
   () => task.value?.name,
@@ -12,21 +12,16 @@ watch(
   }
 )
 
-const getProject = async () => {
-  const { data, error, status } = await TaskWithProjectQuery(route.params?.id)
-
-  if (error) useErrorStore().setError({ error: error, customCode: status })
-  else task.value = data
-}
-
-await getProject()
+await getTask(id)
 </script>
 
 <template>
   <Table v-if="task">
     <TableRow>
       <TableHead> Name </TableHead>
-      <TableCell> {{ task.name }} </TableCell>
+      <TableCell>
+        <AppInPlaceEditText v-model="task.name" @commit="updateTask" />
+      </TableCell>
     </TableRow>
     <TableRow>
       <TableHead> Description </TableHead>

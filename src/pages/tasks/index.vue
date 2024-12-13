@@ -9,6 +9,12 @@ const { tasks } = storeToRefs(taskLoader)
 const { getTasks } = taskLoader
 
 await getTasks()
+
+const { getGroupedCollabs, groupedCollabs } = useCollabs()
+
+getGroupedCollabs(tasks.value ?? [])
+
+const columnsWithCollabs = columns(groupedCollabs)
 </script>
 
 <template>
@@ -17,7 +23,7 @@ await getTasks()
   </div>
 
   <div>
-    <DataTable v-if="tasks" :columns="columns" :data="tasks" />
+    <DataTable v-if="tasks" :columns="columnsWithCollabs" :data="tasks" />
   </div>
 
   <div>

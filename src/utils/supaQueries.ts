@@ -19,6 +19,10 @@ export const TaskWithProjectQuery = (id: string) =>
 
 export type TaskWithProject = QueryData<ReturnType<typeof TaskWithProjectQuery>>
 
+export const updateTaskQuery = (updatedTask = {}, id: number) => {
+  return supabase.from('tasks').update(updatedTask).eq('id', id)
+}
+
 export const projectsQuery = supabase
   .from('projects')
   .select(`id, name, slug, description, created_at, status, collaborators`)

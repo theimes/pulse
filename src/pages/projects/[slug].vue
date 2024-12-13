@@ -82,14 +82,16 @@ const collabs = project.value?.collaborators
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow v-for="p in project?.tasks" :key="p.id">
+            <TableRow v-for="task in project?.tasks" :key="task.id">
               <TableCell>
-                <RouterLink :to="{ name: '/tasks/[id]', params: { id: p.id } }">
-                  {{ p.name }}
+                <RouterLink :to="{ name: '/tasks/[id]', params: { id: task.id } }">
+                  {{ task.name }}
                 </RouterLink>
               </TableCell>
-              <TableCell> {{ p.status }} </TableCell>
-              <TableCell> {{ p.due_date }} </TableCell>
+              <TableCell>
+                <AppInPlaceEditStatus readonly :modeleValue="task.status" />
+              </TableCell>
+              <TableCell> {{ task.due_date }} </TableCell>
             </TableRow>
           </TableBody>
         </Table>

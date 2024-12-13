@@ -1,6 +1,7 @@
 import type { ColumnDef } from '@tanstack/vue-table'
 import type { TasksWithProject } from '../supaQueries'
 import { RouterLink } from 'vue-router'
+import AppInPlaceEditStatus from '@/components/AppInPlaceEdit/AppInPlaceEditStatus.vue'
 
 export const columns: ColumnDef<TasksWithProject[0]>[] = [
   {
@@ -19,7 +20,13 @@ export const columns: ColumnDef<TasksWithProject[0]>[] = [
   {
     accessorKey: 'status',
     header: () => h('div', { class: 'text-left' }, 'Status'),
-    cell: ({ row }) => h('div', { class: 'text-left font-medium' }, row.getValue('status'))
+    cell: ({ row }) => {
+      return h(
+        'div',
+        { class: 'text-left font-medium' },
+        h(AppInPlaceEditStatus, { modelValue: row.original.status, readonly: true })
+      )
+    }
   },
   {
     accessorKey: 'due_date',

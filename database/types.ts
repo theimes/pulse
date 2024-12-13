@@ -84,7 +84,7 @@ export type Database = {
         Insert: {
           collaborators?: string[]
           created_at?: string
-          description: string
+          description?: string
           due_date?: string | null
           id?: never
           name: string

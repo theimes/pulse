@@ -26,13 +26,13 @@ const collabs = project.value?.collaborators
     <TableRow>
       <TableHead> Name </TableHead>
       <TableCell>
-        <AppInPlaceEdit v-model="project.name" @commit="updateProject" />
+        <AppInPlaceEditText v-model="project.name" @commit="updateProject" />
       </TableCell>
     </TableRow>
     <TableRow>
       <TableHead> Description </TableHead>
       <TableCell>
-        <AppInPlaceEdit v-model="project.description" @commit="updateProject" />
+        <AppInPlaceEditTextarea v-model="project.description" @commit="updateProject" />
       </TableCell>
     </TableRow>
     <TableRow>

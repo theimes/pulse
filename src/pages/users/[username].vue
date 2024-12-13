@@ -4,6 +4,8 @@ import type { Tables } from 'database/types'
 
 const { username } = useRoute('/users/[username]').params
 
+usePageStore().pageData.title = ``
+
 // username from the database
 
 const profile = ref<Tables<'profiles'> | null>(null)

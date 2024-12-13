@@ -25,7 +25,9 @@ await getTask(id)
     </TableRow>
     <TableRow>
       <TableHead> Description </TableHead>
-      <TableCell> {{ task.description }} </TableCell>
+      <TableCell>
+        <AppInPlaceEditTextarea v-model="task.description" @commit="updateTask" />
+      </TableCell>
     </TableRow>
     <TableRow>
       <TableHead> Assignee </TableHead>
@@ -41,7 +43,9 @@ await getTask(id)
     </TableRow>
     <TableRow>
       <TableHead> Status </TableHead>
-      <TableCell> {{ task.status }}</TableCell>
+      <TableCell>
+        <AppInPlaceEditStatus v-model="task.status" @commit="updateTask" />
+      </TableCell>
     </TableRow>
     <TableRow>
       <TableHead> Collaborators </TableHead>

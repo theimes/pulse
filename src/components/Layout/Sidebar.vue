@@ -43,8 +43,8 @@ defineEmits(['taskClicked'])
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem @click="$emit('taskClicked')">New Task</DropdownMenuItem>
-          <DropdownMenuItem to="/tasks/new">New Project</DropdownMenuItem>
+          <DropdownMenuItem @click="$emit('taskClicked')"> Task </DropdownMenuItem>
+          <DropdownMenuItem to="/tasks/new"> Project </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

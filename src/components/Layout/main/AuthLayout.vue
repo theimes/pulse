@@ -3,11 +3,17 @@
 const { pageData } = storeToRefs(usePageStore())
 
 const taskSheetOpen = ref(false)
+const projectSheetOpen = ref(false)
 </script>
 
 <template>
-  <Sidebar @taskClicked="taskSheetOpen = !taskSheetOpen" />
+  <Sidebar
+    @taskClicked="taskSheetOpen = !taskSheetOpen"
+    @projectClicked="projectSheetOpen = !projectSheetOpen"
+  />
   <AppNewTask v-model="taskSheetOpen" />
+
+  <AppNewProject v-model="projectSheetOpen" />
 
   <div class="flex flex-col lg:ml-52 ml-16 transition-[margin]">
     <TopNavbar />

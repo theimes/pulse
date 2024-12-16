@@ -24,7 +24,7 @@ const executeAction = async (action: string) => {
   }
 }
 
-defineEmits(['taskClicked'])
+defineEmits(['taskClicked', 'projectClicked'])
 </script>
 
 <template>
@@ -44,7 +44,7 @@ defineEmits(['taskClicked'])
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem @click="$emit('taskClicked')"> Task </DropdownMenuItem>
-          <DropdownMenuItem to="/tasks/new"> Project </DropdownMenuItem>
+          <DropdownMenuItem @click="$emit('projectClicked')"> Project </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

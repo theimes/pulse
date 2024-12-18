@@ -74,7 +74,7 @@ export type Database = {
           collaborators: string[]
           created_at: string
           description: string
-          due_date: string | null
+          due_date: string
           id: number
           name: string
           profile_id: string
@@ -85,7 +85,7 @@ export type Database = {
           collaborators?: string[]
           created_at?: string
           description?: string
-          due_date?: string | null
+          due_date?: string
           id?: never
           name: string
           profile_id: string
@@ -96,7 +96,7 @@ export type Database = {
           collaborators?: string[]
           created_at?: string
           description?: string
-          due_date?: string | null
+          due_date?: string
           id?: never
           name?: string
           profile_id?: string

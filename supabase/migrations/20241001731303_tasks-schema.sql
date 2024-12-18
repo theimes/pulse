@@ -7,7 +7,7 @@ create table
     name text not null,
     status current_status default 'in-progress' not null,
     description text not null default '',
-    due_date date default null,
+    due_date date not null default now(),
     profile_id uuid references profiles (id) on delete cascade not null,
     project_id bigint references projects (id) default null,
     collaborators text array default array[]::varchar[] not null

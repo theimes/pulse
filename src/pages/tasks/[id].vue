@@ -40,7 +40,14 @@ const triggerDelete = async () => {
       <TableRow>
         <TableHead> Due Date </TableHead>
         <TableCell>
-          <AppInPlaceEditText v-model="task.due_date" @commit="updateTask" />
+          <FormKit
+            v-model="task.due_date"
+            @blur="updateTask"
+            type="date"
+            name="due_date"
+            id="due_date"
+            validation="required"
+          />
         </TableCell>
       </TableRow>
       <TableRow>

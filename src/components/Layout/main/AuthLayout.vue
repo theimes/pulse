@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import { useMenu } from '@/composables/menu'
+
 // use the usePageStore to acces the page data
 const { pageData } = storeToRefs(usePageStore())
 
 const taskSheetOpen = ref(false)
 const projectSheetOpen = ref(false)
+
+const { menuOpen } = useMenu()
 </script>
 
 <template>
@@ -15,7 +19,7 @@ const projectSheetOpen = ref(false)
 
   <AppNewProject v-model="projectSheetOpen" />
 
-  <div class="flex flex-col lg:ml-52 ml-16 transition-[margin]">
+  <div class="flex flex-col transition-[margin]" :class="{ 'ml-52': menuOpen, 'ml-24': !menuOpen }">
     <TopNavbar />
     <main class="flex flex-col flex-1 gap-4 p-4 lg:gap-6 lg:p-6">
       <div class="flex items-center">

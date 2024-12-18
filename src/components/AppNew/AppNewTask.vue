@@ -82,6 +82,14 @@ const createTask = async (formData: CreateNewTask) => {
           validation="required|length:1,255"
         />
         <FormKit
+          type="date"
+          name="due_date"
+          id="due_date"
+          label="Due date"
+          help="date on which this task should be done"
+          validation="required"
+        />
+        <FormKit
           type="select"
           name="profile_id"
           id="profile_id"

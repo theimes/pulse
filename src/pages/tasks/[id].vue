@@ -38,6 +38,12 @@ const triggerDelete = async () => {
         </TableCell>
       </TableRow>
       <TableRow>
+        <TableHead> Due Date </TableHead>
+        <TableCell>
+          <AppInPlaceEditText v-model="task.due_date" @commit="updateTask" />
+        </TableCell>
+      </TableRow>
+      <TableRow>
         <TableHead> Description </TableHead>
         <TableCell>
           <AppInPlaceEditTextarea v-model="task.description" @commit="updateTask" />

@@ -3,4 +3,5 @@ export interface CreateNewTask {
   description: string
   project_id: number
   profile_id: string
+  due_date: string
 }

@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { menuKey } from '@/utils/injectionKeys'
+import type { MenuInjectionOptions } from '@/utils/injectionKeys'
 import { useWindowSize } from '@vueuse/core'
-import { useMenu } from '@/composables/menu'
 
 const links = [
   { title: 'Dashboard', to: '/dashboard', icon: 'lucide:home' },
@@ -29,7 +30,7 @@ const executeAction = async (action: string) => {
 
 defineEmits(['taskClicked', 'projectClicked'])
 
-const { menuOpen, toggleMenu } = useMenu()
+const { menuOpen, toggleMenu } = inject(menuKey) as MenuInjectionOptions
 
 const windowWidth = useWindowSize().width
 

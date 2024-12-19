@@ -7,7 +7,7 @@ const { pageData } = storeToRefs(usePageStore())
 const taskSheetOpen = ref(false)
 const projectSheetOpen = ref(false)
 
-const menuOpen = ref(true)
+const menuOpen = ref(false)
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value

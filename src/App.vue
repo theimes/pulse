@@ -40,13 +40,20 @@ const GuestLayout = defineAsyncComponent(() => import('./components/Layout/main/
     <AppErrorPage v-if="activeError" />
 
     <RouterView v-slot="{ Component, route }">
-      <Suspense v-if="Component" :timeout="0.1">
-        <component :is="Component" :key="route.name">Hi</component>
-
-        <template #fallback>
-          <div>Loading...</div>
-        </template>
-      </Suspense>
+      <Transition name="fade" mode="out-in">
+        <div class="w-full" :key="route.path">
+          <Suspense v-if="Component" :timeout="0.1">
+            <component :is="Component">Hi</component>
+            <template #fallback>
+              <div
+                class="absolute top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2 flex justify-center items-center w-full h-screen bg-background bg-opacity-90 z-50"
+              >
+                <iconify-icon icon="lucide:loader-circle" class="text-6xl animate-spin" />
+              </div>
+            </template>
+          </Suspense>
+        </div>
+      </Transition>
     </RouterView>
   </Component>
 </template>

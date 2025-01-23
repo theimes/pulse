@@ -19,14 +19,14 @@ const columnsWithCollabs = columns(groupedCollabs)
 
 <template>
   <div>
-    <h1>Tasks Page</h1>
-  </div>
-
-  <div>
-    <DataTable v-if="tasks" :columns="columnsWithCollabs" :data="tasks" />
-  </div>
-
-  <div>
-    <RouterLink to="/">Home</RouterLink>
+    <div>
+      <h1>Tasks Page</h1>
+    </div>
+    <div>
+      <DataTable v-if="tasks" :columns="columnsWithCollabs" :data="tasks" />
+    </div>
+    <div>
+      <RouterLink to="/">Home</RouterLink>
+    </div>
   </div>
 </template>

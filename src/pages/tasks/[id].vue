@@ -148,3 +148,4 @@ h2 {
 .table-container {
   @apply overflow-hidden overflow-y-auto rounded-md bg-slate-900 h-80;
 }
+</style>

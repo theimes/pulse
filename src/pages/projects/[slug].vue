@@ -19,9 +19,14 @@ const { getProfilesByIds } = useCollabs()
 const collabs = project.value?.collaborators
   ? await getProfilesByIds(project.value?.collaborators)
   : []
+
+useMeta({
+  title: project.value?.name + ' | Pulse'
+})
 </script>
 
 <template>
+  <metainfo></metainfo>
   <div>
     <Table v-if="project">
       <TableRow>

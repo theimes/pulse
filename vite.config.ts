@@ -41,6 +41,9 @@ export default defineConfig({
         VueRouterAutoImports,
         {
           pinia: ['defineStore', 'storeToRefs', 'acceptHMRUpdate']
+        },
+        {
+          'vue-meta': ['useMeta']
         }
       ],
       // Filepath to generate corresponding .d.ts file.

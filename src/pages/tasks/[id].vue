@@ -26,9 +26,14 @@ const triggerDelete = async () => {
   isDeleting.value = false
   router.push({ name: '/tasks/' })
 }
+
+useMeta({
+  title: task.value?.name + ' | Pulse'
+})
 </script>
 
 <template>
+  <metainfo></metainfo>
   <div class="flex flex-col justify-center items-center">
     <Table v-if="task">
       <TableRow>
